@@ -1,0 +1,36 @@
+name: command-dispatcher
+
+on:
+  issue_comment:
+    types:
+      - created
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.issue.pull_request }}
+
+    permissions: write-all
+
+    steps:
+
+      # since this action is triggered by a comment, for the next steps we need
+      # to know the head ref of the pull request in which this comment appeared
+      # so that we can check out the correct working tree
+      - name: Changed paths
+        id: pull_request
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prHelper = require('./.github/workflows/scripts/pr-helper.js');
+
+            const files = prHelper.getFiles(github, context, core);
+            const dirs = prHelper.changedDirs(files, "", 0,);
+
+            console.log("Changed files: ", files);
+            console.log("Changed dirs: ", dirs);
+            
+            core.setOutput('files', files);
+            core.setOutput('', );
+
