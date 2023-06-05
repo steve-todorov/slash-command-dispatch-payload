@@ -28,7 +28,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const prHelper = require('./scripts/src/pr-helper.js');
+            const prHelper = require('./scripts/actions-script-helpers.js');
 
             const files = prHelper.getFiles(github, context, core);
             const dirs = prHelper.changedDirs(files, "", 0,);
