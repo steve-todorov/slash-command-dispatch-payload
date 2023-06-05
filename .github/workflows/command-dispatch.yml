@@ -7,17 +7,22 @@ on:
 
 jobs:
   trigger:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     if: ${{ github.event.issue.pull_request }}
 
-    permissions: write-all
+    permissions:
+      actions: write
+      checks: write
+      contents: write
+      issues: write
+      pull-requests: write
 
     steps:
 
-#      - name: checkout
-#        uses: actions/checkout@v3
-#        with:
-#          fetch-depth: '0'
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
 
       # since this action is triggered by a comment, for the next steps we need
       # to know the head ref of the pull request in which this comment appeared
@@ -28,5 +33,5 @@ jobs:
           # TODO: Custom token is not needed here, permissions: write-all covers this.
           #github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const helpers = require('./scripts/actions-script-helpers.js');
-            helpers.validateApplyCommand(github, context, core);
+            const helpers = require('./.github/workflows/scripts/src/actions-script-helpers.js');
+            
