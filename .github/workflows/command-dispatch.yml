@@ -14,10 +14,10 @@ jobs:
 
     steps:
 
-      - name: checkout
-        uses: actions/checkout@v3
-        with:
-          depth: '0'
+#      - name: checkout
+#        uses: actions/checkout@v3
+#        with:
+#          fetch-depth: '0'
 
       # since this action is triggered by a comment, for the next steps we need
       # to know the head ref of the pull request in which this comment appeared
@@ -28,7 +28,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const prHelper = require('./.github/workflows/scripts/src/pr-helper.js');
+            const prHelper = require('./scripts/src/pr-helper.js');
 
             const files = prHelper.getFiles(github, context, core);
             const dirs = prHelper.changedDirs(files, "", 0,);
