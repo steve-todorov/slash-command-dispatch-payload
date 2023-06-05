@@ -19,10 +19,10 @@ jobs:
 
     steps:
 
-      - name: checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: '0'
+#      - name: checkout
+#        uses: actions/checkout@v3
+#        with:
+#          fetch-depth: '0'
 
       # since this action is triggered by a comment, for the next steps we need
       # to know the head ref of the pull request in which this comment appeared
@@ -33,5 +33,8 @@ jobs:
           # TODO: Custom token is not needed here, permissions: write-all covers this.
           #github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const helpers = require('./.github/workflows/scripts/src/actions-script-helpers.js');
+            const helpers = require('./.github/workflows/scripts/actions-script-helpers.js');
+            
+            
+            
             
