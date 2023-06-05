@@ -33,7 +33,7 @@ jobs:
           # TODO: Custom token is not needed here, permissions: write-all covers this.
           #github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const helpers = require('./.github/workflows/scripts/actions-script-helpers.js');
+            const helpers = require('./scripts/actions-script-helpers.js');
             
             
             
